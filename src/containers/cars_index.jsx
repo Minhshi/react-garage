@@ -3,6 +3,7 @@ import Car from "../components/car"
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { fetchCars } from "../actions";
+import { Link } from 'react-router-dom';
 
 class CarsIndex extends React.Component {
   // static defaultProps = {
@@ -45,9 +46,16 @@ class CarsIndex extends React.Component {
   render() {
     return (
       <div className="cars-container">
+      <div className="cars-new-link">
+      <Link to="/cars/new">
+      Add Car
+      </Link>
+      </div>
+      <div className="cars-list">
         {this.props.cars.map(car => {
           return <Car car={car} key={car.id} />;
         })}
+      </div>
       </div>
     );
   }

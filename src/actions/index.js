@@ -8,3 +8,17 @@ export function fetchCars(garage) {
     payload: promise
   }
 }
+
+export function addCar(garage, car, callback) {
+  const url = `https://wagon-garage-api.herokuapp.com/${garage}/cars`
+  const request = fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(car)
+  }).then(response => response.json()).then(callback)
+
+  return {
+    type: "ADD_CAR",
+    payload: request
+  }
+}
