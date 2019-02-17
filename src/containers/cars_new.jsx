@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { addCar } from "../actions";
 
+const required = value => value ? undefined : 'Required'
+
 class CarsNew extends React.Component {
   onSubmit = values => {
     this.props.addCar(this.props.garage, values, car => {
@@ -12,26 +14,64 @@ class CarsNew extends React.Component {
     });
   };
 
+  renderField(field){
+        const {meta: {touched, error}} = field;
+        const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+        return(
+            <div className={className}>
+                <input type="text" {...field.input} className="form-control"/>
+                <div className="text-help">
+                    {touched ? error : ''}
+                </div>
+            </div>
+        )
+    }
+
   render() {
+
     return (
       <div className="form-container">
         <div className="form">
           <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
             <div>
               <label htmlFor="brand">Brand</label>
-              <Field name="brand" component="input" type="text" />
+              <Field
+                name="brand"
+                label="Brand"
+                type="text"
+                component={this.renderField}
+                validate={required}
+              />
             </div>
             <div>
               <label htmlFor="model">Model</label>
-              <Field name="model" component="input" type="text" />
+              <Field
+                name="model"
+                label="Model"
+                component={this.renderField}
+                type="text"
+                validate={required}
+              />
             </div>
             <div>
               <label htmlFor="owner">Owner</label>
-              <Field name="owner" component="input" type="text" />
+              <Field
+                name="owner"
+                label="Owner"
+                component={this.renderField}
+                type="text"
+                validate={required}
+              />
             </div>
             <div>
               <label htmlFor="plate">Plate</label>
-              <Field name="plate" component="input" type="text" />
+              <Field
+              name="plate"
+              label="Plate"
+              component={this.renderField}
+              type="text"
+              validate={required}
+              />
             </div>
             <button type="submit">Submit</button>
           </form>
