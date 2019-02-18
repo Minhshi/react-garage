@@ -73,10 +73,12 @@ class CarsNew extends React.Component {
               label="Plate"
               component={this.renderField}
               type="text"
-              validate={upper}
+              validate={[required, upper]}
               />
             </div>
-            <button type="submit">Submit</button>
+            <button
+              type="submit"
+              disabled={this.props.invalid || this.props.pristine || this.props.submitting} >Submit</button>
           </form>
         </div>
         <div className="cars-index-link">
