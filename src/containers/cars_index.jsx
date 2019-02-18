@@ -1,9 +1,9 @@
 import React from "react";
-import Car from "../components/car"
+import Car from "../components/car";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { fetchCars } from "../actions";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class CarsIndex extends React.Component {
   // static defaultProps = {
@@ -40,22 +40,26 @@ class CarsIndex extends React.Component {
   // };
 
   componentWillMount() {
-    this.props.fetchCars(this.props.garage)
+    this.props.fetchCars(this.props.garage);
   }
 
   render() {
     return (
       <div className="cars-container">
-      <div className="cars-new-link">
-      <Link to="/cars/new">
-      Add Car
-      </Link>
-      </div>
-      <div className="cars-list">
-        {this.props.cars.map(car => {
-          return <Car car={car} key={car.id} />;
-        })}
-      </div>
+        <div className="cars-new-link">
+          <Link to="/cars/new" className="btn btn-primary">
+            Add Car
+          </Link>
+        </div>
+        <div className="cars-list">
+          {this.props.cars.map(car => {
+            return (
+              <Link to={`/cars/${car.id}`}>
+                <Car car={car} key={car.id} />
+              </Link>
+            );
+          })}
+        </div>
       </div>
     );
   }
