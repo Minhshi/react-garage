@@ -54,7 +54,7 @@ class CarsIndex extends React.Component {
         <div className="cars-list">
           {this.props.cars.map(car => {
             return (
-              <Link to={`/cars/${car.id}`}>
+              <Link to={`/cars/${car.id}`} key={car.id}>
                 <Car car={car} key={car.id} />
               </Link>
             );
