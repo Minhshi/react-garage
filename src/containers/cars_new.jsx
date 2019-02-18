@@ -5,6 +5,9 @@ import { reduxForm, Field } from "redux-form";
 import { addCar } from "../actions";
 
 const required = value => value ? undefined : 'Required'
+const upper = value =>
+  value && !/^[A-Z0-9]+-[0-9]+-[0-9]{2}$/.test(value) ?
+  'Invalid plate number! e.g. MINI-19-87' : undefined
 
 class CarsNew extends React.Component {
   onSubmit = values => {
@@ -70,7 +73,7 @@ class CarsNew extends React.Component {
               label="Plate"
               component={this.renderField}
               type="text"
-              validate={required}
+              validate={upper}
               />
             </div>
             <button type="submit">Submit</button>
